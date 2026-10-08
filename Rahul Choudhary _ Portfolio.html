@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rahul Choudhary (saharanrahul) | Portfolio</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --chip: #21262d;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #ffffff; --panel: #f6f8fa; --border: #d0d7de;
+      --text: #1f2328; --muted: #656d76; --accent: #0969da;
+      --green: #1a7f37; --chip: #eaeef2;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #ffffff; --panel: #f6f8fa; --border: #d0d7de;
+    --text: #1f2328; --muted: #656d76; --accent: #0969da;
+    --green: #1a7f37; --chip: #eaeef2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5; padding-top: var(--safe-top); padding-bottom: var(--safe-bottom);
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 32px 16px; }
+
+  header.top {
+    border-bottom: 1px solid var(--border); padding: 12px 16px;
+    position: sticky; top: var(--safe-top); background: var(--bg); z-index: 5;
+  }
+  header.top nav { max-width: 1000px; margin: 0 auto; display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; }
+  header.top nav a { color: var(--text); }
+
+  .profile { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+  .avatar {
+    width: 220px; height: 220px; border-radius: 50%;
+    background: linear-gradient(135deg, #1f6feb, #3fb950);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 80px; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .profile-info { flex: 1; min-width: 260px; }
+  h1 { margin: 0; font-size: 32px; }
+  .handle { color: var(--muted); font-size: 20px; margin-bottom: 12px; }
+  .status { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+  .bio { font-size: 16px; margin: 12px 0; }
+  .meta { color: var(--muted); font-size: 14px; display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+  .counts { font-size: 14px; color: var(--muted); margin-top: 10px; }
+  .counts strong { color: var(--text); }
+
+  h2 { font-size: 20px; margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+  .about-box {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px;
+    overflow-x: auto; white-space: pre;
+  }
+
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .card h3 { margin: 0 0 10px; font-size: 16px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { background: var(--chip); border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; font-size: 13px; }
+
+  .repo { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  .repo-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .repo-name { font-weight: 600; font-size: 18px; }
+  .badge { font-size: 12px; border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; color: var(--muted); }
+  .repo p { margin: 10px 0; }
+  .lang { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  th { background: var(--panel); }
+  tr:last-child td { border-bottom: none; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+  .stat .num { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .stat .label { font-size: 13px; color: var(--muted); }
+
+  .interests { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .interest { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+  .interest strong { display: block; margin-bottom: 4px; }
+  .interest span { color: var(--muted); font-size: 14px; }
+
+  footer { border-top: 1px solid var(--border); margin-top: 48px; padding: 20px 0; color: var(--muted); font-size: 13px; text-align: center; }
+  section { scroll-margin-top: 80px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <nav>
+    <strong>saharanrahul</strong>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#focus">Focus</a>
+    <a href="#stats">Stats</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <section id="about" class="profile">
+    <div class="avatar">RC</div>
+    <div class="profile-info">
+      <h1>Rahul Choudhary</h1>
+      <div class="handle">saharanrahul</div>
+      <div class="status">💭 I may be slow to respond.</div>
+      <p class="bio">A passionate learner focused on mathematics, programming, and data-driven problem solving. Interested in quantitative analysis and finance.</p>
+      <div class="meta">
+        <span>📍 India</span>
+        <span>🎓 M.Sc. Mathematics (2nd Year), IIT Madras</span>
+        <span>🔗 <a href="https://kohinoora.blogspot.com/">kohinoora.blogspot.com</a></span>
+        <span>💼 <a href="https://linkedin.com/in/saharan-rahul">linkedin.com/in/saharan-rahul</a></span>
+      </div>
+      <div class="counts"><strong>104</strong> followers · <strong>203</strong> following · <strong>9</strong> repositories · <strong>23</strong> stars</div>
+    </div>
+  </section>
+
+  <section style="margin-top:32px;">
+    <div class="about-box">rahul = {
+    "education"   : "M.Sc. Mathematics (2nd Year) — IIT Madras",
+    "interests"   : ["Data Science", "Machine Learning", "Deep Learning", "Quantitative Finance"],
+    "currently"   : "Exploring ML algorithms, Computer Vision & NLP",
+    "looking_for" : "Collaborations on AI/ML & Data Science projects",
+    "ask_me_about": ["Python", "Mathematics", "Data Analysis", "ML Pipelines"],
+    "fun_fact"    : "I see the world through the lens of mathematics 📐"
+}</div>
+  </section>
+
+  <section id="skills">
+    <h2>Tech Stack</h2>
+    <div class="skills">
+      <div class="card">
+        <h3>🐍 Languages & Databases</h3>
+        <div class="chips"><span class="chip">Python</span><span class="chip">MySQL</span><span class="chip">LaTeX</span></div>
+      </div>
+      <div class="card">
+        <h3>📊 Data Science</h3>
+        <div class="chips"><span class="chip">NumPy</span><span class="chip">Pandas</span><span class="chip">Matplotlib</span><span class="chip">Seaborn</span><span class="chip">Plotly</span></div>
+      </div>
+      <div class="card">
+        <h3>🤖 Machine Learning & DL</h3>
+        <div class="chips"><span class="chip">scikit-learn</span><span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">PyTorch</span><span class="chip">XGBoost</span></div>
+      </div>
+      <div class="card">
+        <h3>👁️ Computer Vision & NLP</h3>
+        <div class="chips"><span class="chip">OpenCV</span><span class="chip">NLTK</span><span class="chip">Hugging Face</span><span class="chip">Pillow</span></div>
+      </div>
+      <div class="card">
+        <h3>📈 Explainability</h3>
+        <div class="chips"><span class="chip">SHAP</span><span class="chip">LIME</span><span class="chip">ELI5</span></div>
+      </div>
+      <div class="card">
+        <h3>🧰 Tools & Platforms</h3>
+        <div class="chips"><span class="chip">GitHub</span><span class="chip">Git</span><span class="chip">Jupyter</span><span class="chip">VS Code</span><span class="chip">Linux</span><span class="chip">Anaconda</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Pinned & Featured Projects</h2>
+
+    <div class="repo">
+      <div class="repo-head">
+        <span class="repo-name">face-recognition-using-pca</span>
+        <span class="badge">Public</span>
+      </div>
+      <p>Face recognition built on Principal Component Analysis (eigenfaces), implemented in a Jupyter notebook.</p>
+      <div class="lang"><span class="dot" style="background:#DA5B0B"></span> Jupyter Notebook</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Project</th><th>Description</th><th>Tech Stack</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🔍 XAI Dashboard</td><td>Explaining black-box ML models interactively</td><td>Python, SHAP, LIME, Streamlit</td><td>Coming soon</td></tr>
+          <tr><td>📈 Quant Finance Analyzer</td><td>Market trend analysis & prediction</td><td>Pandas, scikit-learn, Matplotlib</td><td>Coming soon</td></tr>
+          <tr><td>👁️ Computer Vision Pipeline</td><td>Object detection & image classification</td><td>OpenCV, TensorFlow, Keras</td><td>Coming soon</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="focus">
+    <h2>Current Focus</h2>
+    <div class="interests">
+      <div class="interest"><strong>🔬 Explainable AI (XAI)</strong><span>Interpreting ML models using SHAP, LIME & ELI5</span></div>
+      <div class="interest"><strong>📉 Quantitative Finance</strong><span>Applying ML to financial data, risk modeling & algorithmic trading strategies</span></div>
+      <div class="interest"><strong>🧠 Deep Learning</strong><span>CNNs, RNNs, and Transformers for real-world problems</span></div>
+      <div class="interest"><strong>📊 Data Analysis</strong><span>End-to-end pipelines from raw data to actionable insights</span></div>
+    </div>
+  </section>
+
+  <section id="stats">
+    <h2>GitHub Stats</h2>
+    <div class="stats">
+      <div class="stat"><div class="num">9</div><div class="label">Repositories</div></div>
+      <div class="stat"><div class="num">23</div><div class="label">Stars received</div></div>
+      <div class="stat"><div class="num">104</div><div class="label">Followers</div></div>
+      <div class="stat"><div class="num">203</div><div class="label">Following</div></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Connect</h2>
+    <p>
+      <a href="mailto:rk5010985@gmail.com">Email</a> &nbsp;·&nbsp;
+      <a href="https://github.com/saharanrahul">GitHub</a> &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/saharan-rahul">LinkedIn</a> &nbsp;·&nbsp;
+      <a href="https://kohinoora.blogspot.com/">Blog</a>
+    </p>
+    <p style="color:var(--muted); font-size:14px;">"Mathematics is the language in which the universe is written." — Galileo Galilei</p>
+  </section>
+
+  <footer>Rahul Choudhary · saharanrahul</footer>
+</div>
+
+</body>
+</html>
